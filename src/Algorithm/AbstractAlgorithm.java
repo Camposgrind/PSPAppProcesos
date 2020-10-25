@@ -69,6 +69,7 @@ public abstract class AbstractAlgorithm {
 		double tiempoLlegada;
 		double tiempoSalida;
 		double rafaga;
+		double resultadoProceso;
 		
 		for (int i=0;i<listaProcesos.size();i++) {
 			
@@ -77,11 +78,21 @@ public abstract class AbstractAlgorithm {
 			tiempoSalida = miProceso.getTiempoSalida()+1;
 			rafaga = miProceso.getRafagaInicial();
 			
-			resultado += ((tiempoSalida-tiempoLlegada)/rafaga);		
-				
+			resultadoProceso= (tiempoSalida-tiempoLlegada)/rafaga;
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("El indice de penalización del proceso "+ miProceso.getLetra() +" es " 
+					+resultadoProceso);
+			
+			resultado += resultadoProceso; 	
+					
 			}
 		
 		resultado = resultado/(listaProcesos.size());
-		System.out.println(resultado);
+		System.out.println("La media de penalización es "+resultado);
 	}
 }
